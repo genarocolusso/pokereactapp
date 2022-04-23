@@ -23,7 +23,7 @@ const handler = useCallback(debounce((id : string) =>
     <S.Container>
     <form  onSubmit={(e)=>{  e.preventDefault(); }}>
         <label> 
-            <input type="text" name="Name" placeholder='Enter pokemon name'  onChange={(e) => handler(e.target.value)}  />
+            <input type="text" name="Name" placeholder='Enter pokemon ID number'  onChange={(e) => handler(e.target.value)}  />
             <S.SearchButton />
         </label>
     </form>
