@@ -11,14 +11,16 @@ interface pokemonProps {
 
 export const Addedpokemon = ({pokemon, index} : pokemonProps) => {
   
-  const { setShiny } = usePokemonTeam();
+  const { setShiny, handleSetShowPokemon } = usePokemonTeam();
 
   const avatar = pokemon?.isShiny ? pokemon?.sprite[1] : pokemon?.sprite[0];
   
   return pokemon ? (
-    <S.Container>
+     
+    <S.Container as="button"  onClick={()=>handleSetShowPokemon(pokemon)}>
      <S.Text> {pokemon.name} </S.Text>
      <S.Floatimage src={avatar} alt='' onClick={()=> setShiny(!pokemon.isShiny, index)}></S.Floatimage>
     </S.Container>
+     
   ) : (<></>)
 }

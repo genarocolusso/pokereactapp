@@ -1,5 +1,7 @@
+import { pokemonInterface } from './../../../contexts/PokemonTeamContext';
 import styled from "styled-components";
 
+ 
 export const Container = styled.div`
 position: relative;
 color: #6FCF97;
