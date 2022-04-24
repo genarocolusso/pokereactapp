@@ -26,11 +26,11 @@ You will also see any lint errors in the console.
 
 ### ToDo :
  
-- Add [Nookies](https://github.com/maticzav/nookies) to store pokemonTeam on cookies
-- Get Type weaknesses from Api   
-- Recreate UI using [Chakra-UI](https://chakra-ui.com/) 
-- Add [Prettier](https://prettier.io/) and [ESLint](https://eslint.org/)
-- A way to share your pokemonTeam on twitter.
+- [x] Add [Nookies](https://github.com/maticzav/nookies) to store pokemonTeam on cookies
+- [ ] Get Type weaknesses from Api   
+- [ ] Recreate UI using [Chakra-UI](https://chakra-ui.com/) 
+- [ ] Add [Prettier](https://prettier.io/) and [ESLint](https://eslint.org/)
+- [ ] A way to share your pokemonTeam on twitter.
  
 ## 😎 Contact
 
