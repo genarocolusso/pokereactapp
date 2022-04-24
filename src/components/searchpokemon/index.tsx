@@ -1,21 +1,18 @@
 import React, { useCallback, useState } from 'react'
 import { debounce } from "lodash";
-import { usePokemon } from '../../services/hooks/usePokemon';
 import { ShowPokemon } from '../showpokemon'
 
 import * as S from './styles';
+import { usePokemonTeam } from '../../hooks/usePokemonTeamContext';
 
 export const Searchpokemon: React.FC = () => {
-    const [pokemon, setPokemon ] = useState<number>(1);
-  const { data, isLoading, isFetching, error } = usePokemon(pokemon)
-
-  console.log(data);
-
   
+  const { handlerSearch, showpokemon } = usePokemonTeam()
+ 
 const handler = useCallback(debounce((id : string) => 
 {
   if(id.length>0)
-  setPokemon(parseInt(id))
+  handlerSearch(id)
 }, 1000), []);
 
 
@@ -27,7 +24,7 @@ const handler = useCallback(debounce((id : string) =>
             <S.SearchButton />
         </label>
     </form>
-    { data &&  (<ShowPokemon pokemonData={data.pokemon} />)}
+    { showpokemon &&  (<ShowPokemon pokemonData={showpokemon} />)}
       
     </S.Container>
   )

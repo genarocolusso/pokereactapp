@@ -28,6 +28,6 @@ export async function getPokemon(id: number): Promise<GetPokemonResponse> {
 
 export function usePokemon(id: number) {
   return useQuery(['pokemon', id], () => getPokemon(id), {
-    staleTime: 1000 * 600  // 5 segundos
+    staleTime: 1000 * 600  // 10min
   })
 }

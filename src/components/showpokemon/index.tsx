@@ -15,17 +15,20 @@ interface showPokemonProps {
 
 }
 
-export function ShowPokemon(pokemonData: showPokemonProps) {
+export function ShowPokemon({pokemonData}: showPokemonProps) {
   
-  const {handlePokemonTeam} = usePokemonTeam()
-  const [Shiny, setShiny] = useState<Boolean>(false);
-  const pokemon = pokemonData.pokemonData
-  const isShiny = Shiny ? pokemon.sprite[1] : pokemon.sprite[0];
+  const {handlePokemonTeam, showpokemon, handleSetShowPokemon} = usePokemonTeam() 
+  const pokemon = showpokemon;
+  const isShiny = pokemon.isShiny ? pokemon.sprite[1] : pokemon.sprite[0];
   
   
+  const handleShiny = (shinyValue : boolean) =>{    
+    handleSetShowPokemon({...pokemon, isShiny: shinyValue});
+  }
+
   return (
     <S.Container>
-      <div>
+      {pokemon && (<div>
       <S.PokemonPicture>
         <img src={isShiny} />
       </S.PokemonPicture>
@@ -52,6 +55,9 @@ export function ShowPokemon(pokemonData: showPokemonProps) {
         </S.TypeRow>
       </S.PokemonTypeContainer> */}
       </div>
+      
+      )}
+
       <S.TypeRow> 
       <Button 
       text={`Add Pokémon`} 
@@ -61,8 +67,8 @@ export function ShowPokemon(pokemonData: showPokemonProps) {
      <Button 
      text={`Shiny`} 
      bgColor="#6FCF97" 
-     icon={Shiny ? <FaStar/> : <FaStarHalfAlt/>}  
-     handleClick={()=> setShiny(!Shiny)}/>
+     icon={pokemon.isShiny ? <FaStar/> : <FaStarHalfAlt/>}  
+     handleClick={()=> handleShiny(!pokemon.isShiny)}/>
      </S.TypeRow>
     </S.Container>
   )
