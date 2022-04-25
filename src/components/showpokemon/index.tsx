@@ -1,13 +1,12 @@
-import React, { useState } from 'react'
 import * as S from './styles'
 import { TypePokemon } from './Type'
-
-import defaultImg from '../../assets/imgdefault.png';
+ 
  
 import { FaStar, FaStarHalfAlt } from 'react-icons/fa'
-import { Button } from '../button';
+ 
 import { usePokemonTeam } from '../../hooks/usePokemonTeamContext';
 import { pokemonInterface } from '../../contexts/PokemonTeamContext';
+import { Button, Icon } from '@chakra-ui/react';
 
  
 interface showPokemonProps {
@@ -59,16 +58,14 @@ export function ShowPokemon({pokemonData}: showPokemonProps) {
       )}
 
       <S.TypeRow> 
-      <Button 
-      text={`Add Pokémon`} 
-      bgColor="black"
-      handleClick={()=> handlePokemonTeam(pokemon)}
-      />
-     <Button 
-     text={`Shiny`} 
-     bgColor="#6FCF97" 
-     icon={pokemon.isShiny ? <FaStar/> : <FaStarHalfAlt/>}  
-     handleClick={()=> handleShiny(!pokemon.isShiny)}/>
+      <Button   
+      colorScheme='gray' 
+      onClick={()=> handlePokemonTeam(pokemon)}
+       >Add Pokémon</Button> 
+     <Button  
+     colorScheme='teal'  
+     onClick={()=> handleShiny(!pokemon.isShiny)}>
+     <Icon  as={pokemon.isShiny ?  FaStar  : FaStarHalfAlt} /> Shiny </Button> 
      </S.TypeRow>
     </S.Container>
   )

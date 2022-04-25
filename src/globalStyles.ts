@@ -4,11 +4,9 @@ const GlobalStyle = createGlobalStyle`
   body {
     display: flex;
     padding: 0;
-    background: #E1FAE1;
     font-family: Open-Sans,Helvetica,Sans-Serif;
     align-items: center;
-    justify-content: center;
-    padding: 20px 0px;
+    justify-content: center; 
     width: 100%;
   }
 

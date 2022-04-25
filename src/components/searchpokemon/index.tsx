@@ -2,8 +2,10 @@ import React, { useCallback, useState } from 'react'
 import { debounce } from "lodash";
 import { ShowPokemon } from '../showpokemon'
 
-import * as S from './styles';
+import { FaSearch } from 'react-icons/fa';
+  
 import { usePokemonTeam } from '../../hooks/usePokemonTeamContext';
+import { Box, Flex, Input, Icon  } from '@chakra-ui/react';
 
 export const Searchpokemon: React.FC = () => {
   
@@ -17,15 +19,16 @@ const handler = useCallback(debounce((id : string) =>
 
 
   return (
-    <S.Container>
+    <Flex flexDir={'column'} pos={'relative'}>
     <form  onSubmit={(e)=>{  e.preventDefault(); }}>
-        <label> 
-            <input type="text" name="Name" placeholder='Enter pokemon ID number'  onChange={(e) => handler(e.target.value)}  />
-            <S.SearchButton />
-        </label>
+        <Box as={'label'} display={"flex"} flexDir={'row'} alignItems={'center'}> 
+            <Icon  as={FaSearch} fontSize={16} mr={4}/>
+            <Input   variant='unstyled'   size='md' type="text" name="Name" placeholder='Enter pokemon ID number'  onChange={(e) => handler(e.target.value)}  />
+             
+        </Box>
     </form>
     { showpokemon &&  (<ShowPokemon pokemonData={showpokemon} />)}
       
-    </S.Container>
+    </Flex>
   )
 }

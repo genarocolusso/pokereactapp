@@ -1,6 +1,6 @@
-import React from 'react'
-import * as S from './styles';
-import defaultImg from '../../../assets/imgdefault.png';
+import { Image, Button, Text } from '@chakra-ui/react';
+import React from 'react' 
+
 import { pokemonInterface } from '../../../contexts/PokemonTeamContext';
 import { usePokemonTeam } from '../../../hooks/usePokemonTeamContext';
 
@@ -17,10 +17,10 @@ export const Addedpokemon = ({pokemon, index} : pokemonProps) => {
   
   return pokemon ? (
      
-    <S.Container as="button"  onClick={()=>handleSetShowPokemon(pokemon)}>
-     <S.Text> {pokemon.name} </S.Text>
-     <S.Floatimage src={avatar} alt='' onClick={()=> setShiny(!pokemon.isShiny, index)}></S.Floatimage>
-    </S.Container>
+    <Button  h={'55px'} minW={"300px"} display={"flex"} justifyContent={"space-between"} px={6} onClick={()=>handleSetShowPokemon(pokemon)}>
+     <Text textTransform={'capitalize'}> {pokemon.name} </Text>
+     <Image src={avatar} alt={pokemon.name} onClick={()=> setShiny(!pokemon.isShiny, index)}></Image>
+    </Button>
      
   ) : (<></>)
 }
