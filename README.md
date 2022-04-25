@@ -15,7 +15,7 @@ The page will reload if you make edits.\
 You will also see any lint errors in the console.
  
  
- You can access it at [DEMO](https://pokereactapp.vercel.app/). 
+ You can access it at [DEMO](https://poketeambuilder.vercel.app/). 
  
  ### ⚡️ Built With
 
