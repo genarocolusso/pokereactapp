@@ -59,7 +59,7 @@ export function ShowPokemon({pokemonData}: showPokemonProps) {
 
       <S.TypeRow> 
       <Button   
-      colorScheme='gray' 
+      colorScheme='green' 
       onClick={()=> handlePokemonTeam(pokemon)}
        >Add Pokémon</Button> 
      <Button  

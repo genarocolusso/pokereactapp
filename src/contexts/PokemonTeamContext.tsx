@@ -1,8 +1,10 @@
 import { debounce } from "lodash";
-import React, { createContext, ReactNode, useEffect, useState } from "react";
+import React, { createContext, ReactNode, useEffect, useState, useReducer } from "react";
 import { usePokemon } from "../services/hooks/usePokemon";
 import { QueryEffects } from "../types/queryTypes";
 import { parseCookies, setCookie, destroyCookie } from 'nookies'
+import { initialState, pokemon_actions, reducer } from "./reducer";
+
 
 export interface pokemonInterface {
     id: string,
@@ -27,6 +29,7 @@ type pokemonContextData = {
     handleSetShowPokemon: (pokemon : pokemonInterface) => void,
     handlerSearch: (id: string) => void,
     handleDeletePokeTeam: () => void,
+    handleRemovePokemon: (id: string) => void,
   } & QueryEffects;
  
   interface ProviderProps {
@@ -42,7 +45,8 @@ export const PokemonTeamContext = createContext({} as pokemonContextData)
 
 export const PokemonTeamContextProvider = (props : ProviderProps) =>{
   const { pokemonTeam: pokemonTeamCookie } = parseCookies();
-  const [pokemons, setPokemons] = useState<pokemonInterface[]>([]);
+  const [pokemons, dispatch] = useReducer(reducer,initialState)
+  //const [pokemons, setPokemons] = useState<pokemonInterface[]>([]);
   const [showpokemon, setShowpokemon] = useState<pokemonInterface>(DEFAULT_VALUE);
   const [pokemonSearch, setPokemonSearch ] = useState<number>(1);
 
@@ -57,7 +61,8 @@ export const PokemonTeamContextProvider = (props : ProviderProps) =>{
     if (pokemonTeamCookie) {
       const cookieTeam : pokemonInterface[] =
         JSON.parse(pokemonTeamCookie);
-        setPokemons(cookieTeam);
+        //setPokemons(cookieTeam);
+        dispatch({ type: pokemon_actions.LOAD_TEAM, Team:cookieTeam });
     }  
   }, []) 
  
@@ -75,14 +80,9 @@ export const PokemonTeamContextProvider = (props : ProviderProps) =>{
       } 
   },[pokemons])
 
-    const handlePokemonTeam =(pokemon : pokemonInterface) => { 
-           
-      const allPokeIds = pokemons.map(pokemon => pokemon.id) 
-      const hasAlready = allPokeIds.includes(pokemon.id);
-      const newPokemon = {...pokemon};
-      if(pokemons.length<6 && !hasAlready)
-      setPokemons(pokemons => [...pokemons, newPokemon]); 
-       
+    const handlePokemonTeam =(pokemon : pokemonInterface) => {    
+      dispatch({ type: pokemon_actions.ADD_POKEMON, pokemon });
+     
     }
 
     const handleSetShowPokemon = (pokemon: pokemonInterface) =>{
@@ -91,9 +91,12 @@ export const PokemonTeamContextProvider = (props : ProviderProps) =>{
     
     const handleDeletePokeTeam = () => {
       destroyCookie(null, 'pokemonTeam')
-      setPokemons([]);
+      dispatch({ type: pokemon_actions.DELETE_TEAM });
     }
-           
+        
+    const handleRemovePokemon = (id) => { 
+      dispatch({ type: pokemon_actions.REMOVE_POKEMON , id});
+    }   
     const handlerSearch = (id : string) => 
     { 
       setPokemonSearch(parseInt(id))
@@ -107,7 +110,9 @@ export const PokemonTeamContextProvider = (props : ProviderProps) =>{
            }
           return pokemon;
       })
-        setPokemons(changeShiny);        
+
+      dispatch({ type: pokemon_actions.LOAD_TEAM, Team: changeShiny  });
+             
     }
 
 
@@ -119,6 +124,7 @@ export const PokemonTeamContextProvider = (props : ProviderProps) =>{
       handleSetShowPokemon, 
       handlerSearch,
       handleDeletePokeTeam,
+      handleRemovePokemon,
       isLoading, 
       isFetching, 
       error
