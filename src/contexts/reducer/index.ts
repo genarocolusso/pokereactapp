@@ -13,18 +13,7 @@ export const reducer = (state, action) => {
     console.log(action, state)
     switch (action.type){
         case pokemon_actions.ADD_POKEMON:
-              {
-                console.log(action.pokemon)
-                const allPokeIds = state.map(pokemon => pokemon.id) 
-                const hasAlready = allPokeIds.includes(action.pokemon.id);
-                const newPokemon = {...action.pokemon};
-                if(state.length<6 && !hasAlready){
-                 
-                    return  [...state, newPokemon]  
-                }
-
-                 return state;
-            };
+                 return  [...state, action.newPokemon]   
         case pokemon_actions.REMOVE_POKEMON:
             return [...state.filter(pokemon => pokemon.id!=action.id)]
         case pokemon_actions.LOAD_TEAM: 

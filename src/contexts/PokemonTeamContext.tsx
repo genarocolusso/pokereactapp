@@ -80,8 +80,14 @@ export const PokemonTeamContextProvider = (props : ProviderProps) =>{
       } 
   },[pokemons])
 
-    const handlePokemonTeam =(pokemon : pokemonInterface) => {    
-      dispatch({ type: pokemon_actions.ADD_POKEMON, pokemon });
+    const handlePokemonTeam =(pokemon : pokemonInterface) => {  
+    
+      const allPokeIds = pokemons.map(pokemon => pokemon.id) 
+      const hasAlready = allPokeIds.includes(pokemon.id);
+      const newPokemon = {...pokemon};
+      if(pokemons.length<6 && !hasAlready){   
+      dispatch({ type: pokemon_actions.ADD_POKEMON, newPokemon });
+      }
      
     }
 
