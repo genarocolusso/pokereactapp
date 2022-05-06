@@ -48,12 +48,14 @@ export const PokemonTeamContextProvider = (props : ProviderProps) =>{
   const [pokemons, dispatch] = useReducer(reducer,initialState)
   const [showpokemon, setShowpokemon] = useState<pokemonInterface>(DEFAULT_VALUE);
   const [pokemonSearch, setPokemonSearch ] = useState<number>(1);
-
-  const { data, isLoading, isFetching, error } = usePokemon(pokemonSearch);
+   const { data, isLoading, isFetching, error } = usePokemon(pokemonSearch);
 
   useEffect(() => {
-    if(data)
+    if(data){
+      
     setShowpokemon(data?.pokemon);
+ 
+  }
   }, [data]);
 
   useEffect(() => {
@@ -89,8 +91,8 @@ export const PokemonTeamContextProvider = (props : ProviderProps) =>{
      
     }
 
-    const handleSetShowPokemon = (pokemon: pokemonInterface) =>{
-         setShowpokemon(pokemon);
+    const handleSetShowPokemon = (pokemon: pokemonInterface) =>{ 
+     setShowpokemon(pokemon);
     }
     
     const handleDeletePokeTeam = () => {

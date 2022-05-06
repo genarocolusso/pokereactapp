@@ -3,7 +3,7 @@ import { Box } from '@chakra-ui/react';
 
 interface typeProps {
 name: string;
-typeEffect?: string;
+typeEffect?: string; 
 }
 
 function capitalizeFirstLetter(string) {
@@ -11,7 +11,7 @@ function capitalizeFirstLetter(string) {
   }
 
   
-export const TypePokemon = ({name, typeEffect}: typeProps) =>{
+export const TypePokemon = ({name, typeEffect }: typeProps) =>{
  
     const typeColor :string  =  PokeTypes[`${name}`]
 

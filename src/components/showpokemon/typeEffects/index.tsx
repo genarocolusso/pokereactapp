@@ -25,7 +25,7 @@ export const TypeEffect = ({typeurl, typename}: typeProps) =>{
             <Text><b>{typename}</b> does double damage against</Text>
             <SimpleGrid columns={[2,2,2,4]} spacing={1}>
             {double_damage_to.map(types => 
-                <TypePokemon typeEffect="2" name={types.name.toUpperCase()}/>
+                <TypePokemon key={types.name} typeEffect="2" name={types.name.toUpperCase()}/>
                 )
             }
             </SimpleGrid>
