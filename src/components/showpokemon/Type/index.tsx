@@ -1,18 +1,28 @@
-import * as S from './styles'
-import {PokeTypes} from './constants'
+import {PokeTypes} from './typeconstants'
+import { Box } from '@chakra-ui/react';
 
 interface typeProps {
 name: string;
 typeEffect?: string;
 }
 
+function capitalizeFirstLetter(string) {
+    return string.charAt(0).toUpperCase() + string.slice(1);
+  }
+
+  
 export const TypePokemon = ({name, typeEffect}: typeProps) =>{
  
     const typeColor :string  =  PokeTypes[`${name}`]
 
-    return (
-        <S.Container typeColor={typeColor} >
-            {name.toLowerCase()}  {typeEffect && `X${typeEffect}`}
-        </S.Container>
+    return (<>
+        {!typeEffect &&  (<Box bg={'white'} border={`1px solid ${typeColor}`} borderRadius={'6'} color={typeColor} textAlign="center" px={4} >
+        {capitalizeFirstLetter(name.toLowerCase())}  {typeEffect && `X${typeEffect}`}
+    </Box> )}
+        
+    {typeEffect &&  (<Box bg={typeColor} border={`1px solid ${typeColor}`} borderRadius={'6'} color={'white'} textAlign="center" px={4} >
+        {capitalizeFirstLetter(name.toLowerCase())}  {typeEffect && `X${typeEffect}`}
+    </Box> )}
+        </>
     ) 
 }

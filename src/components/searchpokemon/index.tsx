@@ -9,7 +9,7 @@ import { Box, Flex, Input, Icon  } from '@chakra-ui/react';
 
 export const Searchpokemon: React.FC = () => {
   
-  const { handlerSearch, showpokemon } = usePokemonTeam()
+  const { handlerSearch } = usePokemonTeam()
  
 const handler = useCallback(debounce((id : string) => 
 {
@@ -27,7 +27,7 @@ const handler = useCallback(debounce((id : string) =>
              
         </Box>
     </form>
-    { showpokemon &&  (<ShowPokemon pokemonData={showpokemon} />)}
+    <ShowPokemon/>
       
     </Flex>
   )

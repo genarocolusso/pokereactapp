@@ -36,6 +36,7 @@ export const PokemonTypeContainer = styled.div`
     flex-direction: column;
     position: relative;
     margin-bottom: 16px;
+    margin-top: 16px;
 `;
 
  

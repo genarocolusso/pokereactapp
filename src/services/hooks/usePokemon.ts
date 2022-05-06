@@ -17,7 +17,8 @@ export async function getPokemon(id: number): Promise<GetPokemonResponse> {
   const pokemon ={
         id: data.id,
         name: data.name,
-        type: data.types.map((x:any) => x.type.name),
+        type: data.types.map((x) => x.type.name),
+        typeurl: data.types.map((x) => x.type.url.split('v2/')[1]),
         sprite: [data.sprites.front_default, data.sprites.front_shiny],
         isShiny: false,
     }

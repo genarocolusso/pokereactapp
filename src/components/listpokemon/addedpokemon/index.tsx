@@ -27,5 +27,5 @@ export const Addedpokemon = ({pokemon, index} : pokemonProps) => {
       </HStack>
        </Button>
      
-  ) : (<></>)
+  ) : (null)
 }

@@ -1,25 +1,19 @@
 import * as S from './styles'
-import { TypePokemon } from './Type'
- 
+import { TypePokemon } from './type'
  
 import { FaStar, FaStarHalfAlt } from 'react-icons/fa'
  
 import { usePokemonTeam } from '../../hooks/usePokemonTeamContext';
 import { pokemonInterface } from '../../contexts/PokemonTeamContext';
-import { Button, Icon } from '@chakra-ui/react';
+import { Button, Icon } from '@chakra-ui/react'; 
+import { TypeEffect } from './typeEffects';
 
- 
-interface showPokemonProps {
-  pokemonData: pokemonInterface,
 
-}
-
-export function ShowPokemon({pokemonData}: showPokemonProps) {
+export function ShowPokemon() {
   
   const {handlePokemonTeam, showpokemon, handleSetShowPokemon} = usePokemonTeam() 
   const pokemon = showpokemon;
   const isShiny = pokemon.isShiny ? pokemon.sprite[1] : pokemon.sprite[0];
-  
   
   const handleShiny = (shinyValue : boolean) =>{    
     handleSetShowPokemon({...pokemon, isShiny: shinyValue});
@@ -27,6 +21,7 @@ export function ShowPokemon({pokemonData}: showPokemonProps) {
 
   return (
     <S.Container>
+      
       {pokemon && (<div>
       <S.PokemonPicture>
         <img src={isShiny} />
@@ -45,19 +40,8 @@ export function ShowPokemon({pokemonData}: showPokemonProps) {
         })} 
         </S.TypeRow>
        </S.PokemonTypeContainer>
-
-      {/* <S.PokemonTypeContainer>
-        <S.Title>Type Effectiveness</S.Title>
-        <S.TypeRow> 
-        <TypePokemon name="FIGHTING" typeEffect="2" ></TypePokemon>
-        <TypePokemon name="GHOST" typeEffect="0"></TypePokemon>
-        </S.TypeRow>
-      </S.PokemonTypeContainer> */}
-      </div>
-      
-      )}
-
-      <S.TypeRow> 
+        
+       <S.TypeRow> 
       <Button   
       colorScheme='green' 
       onClick={()=> handlePokemonTeam(pokemon)}
@@ -67,6 +51,22 @@ export function ShowPokemon({pokemonData}: showPokemonProps) {
      onClick={()=> handleShiny(!pokemon.isShiny)}>
      <Icon  as={pokemon.isShiny ?  FaStar  : FaStarHalfAlt} /> Shiny </Button> 
      </S.TypeRow>
+
+        <S.PokemonTypeContainer>
+          <S.Title> Effectiveness</S.Title>
+          {pokemon.typeurl.map((url,i)=>{
+            if(url.length>0)
+            return (
+              <TypeEffect typename={pokemon.type[i]} typeurl={url} key={i}/>
+            )
+          })}
+        </S.PokemonTypeContainer>
+       
+      </div>
+      
+      )}
+
+     
     </S.Container>
   )
 }
