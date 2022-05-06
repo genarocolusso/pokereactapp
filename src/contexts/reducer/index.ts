@@ -10,7 +10,7 @@ export const pokemon_actions = {
   export const initialState: pokemonInterface[] = []
 
 export const reducer = (state, action) => {
-    console.log(action, state)
+    
     switch (action.type){
         case pokemon_actions.ADD_POKEMON:
                  return  [...state, action.newPokemon]   
