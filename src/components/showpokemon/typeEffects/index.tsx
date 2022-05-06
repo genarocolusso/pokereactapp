@@ -1,6 +1,6 @@
 import { Box, HStack, SimpleGrid, Spinner, Text } from "@chakra-ui/react";
 import { useTypes } from "../../../services/hooks/useTypes";
-import { TypePokemon } from "../type";
+import { TypePokemon } from "../typepokemon";
 
 interface typeProps {
 typeurl: string

@@ -1,5 +1,5 @@
 import * as S from './styles'
-import { TypePokemon } from './type'
+import { TypePokemon } from './typepokemon'
  
 import { FaStar, FaStarHalfAlt } from 'react-icons/fa'
  
