@@ -50,14 +50,14 @@ export const PokemonTeamContextProvider = (props : ProviderProps) =>{
   const [pokemonSearch, setPokemonSearch ] = useState<number>(1);
    const { data, isLoading, isFetching, error } = usePokemon(pokemonSearch);
 
+   // changes pokemon shown
   useEffect(() => {
-    if(data){
-      
+    if(data){      
     setShowpokemon(data?.pokemon);
- 
-  }
+   }
   }, [data]);
 
+  //get pokemon team Cookies
   useEffect(() => {
     if (pokemonTeamCookie) {
       const cookieTeam : pokemonInterface[] =
@@ -66,6 +66,7 @@ export const PokemonTeamContextProvider = (props : ProviderProps) =>{
     }  
   }, []) 
  
+  //save on cookies pokemon changes
   useEffect(()=>{ 
     if(pokemons.length>0){
       setCookie(
@@ -80,6 +81,8 @@ export const PokemonTeamContextProvider = (props : ProviderProps) =>{
       } 
   },[pokemons])
 
+
+  // Add pokemon to team
     const handlePokemonTeam =(pokemon : pokemonInterface) => {  
     
       const allPokeIds = pokemons.map(pokemon => pokemon.id) 
@@ -91,6 +94,7 @@ export const PokemonTeamContextProvider = (props : ProviderProps) =>{
      
     }
 
+    //set shown pokemon
     const handleSetShowPokemon = (pokemon: pokemonInterface) =>{ 
      setShowpokemon(pokemon);
     }
@@ -103,7 +107,8 @@ export const PokemonTeamContextProvider = (props : ProviderProps) =>{
     const handleRemovePokemon = (id) => { 
       dispatch({ type: pokemon_actions.REMOVE_POKEMON , id});
     }  
-     
+    
+    //search pokemon id
     const handlerSearch = (id : string) => 
     { 
       setPokemonSearch(parseInt(id))
@@ -143,3 +148,14 @@ export const PokemonTeamContextProvider = (props : ProviderProps) =>{
         </PokemonTeamContext.Provider>
     )
 }
+
+
+/*
+
+The code is big but it manages the pokemonShown and pokemonTeam state for the application
+I'm using useReducer to manage state and actions and it can be changed to add new functionalities
+such as new teams and easily add, delete and update them. 
+
+Using context It's way better than props drilling. this way you can access states and functions in any component without passing callbacks over components props.
+
+*/
