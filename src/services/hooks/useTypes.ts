@@ -1,7 +1,7 @@
 import { useQuery } from "react-query";
 import { api } from "../api";
 
-export interface TypeDamageReponse {
+export interface TypeDamageResponse {
     damage_relations: DamageRelations
   }
   
@@ -40,7 +40,7 @@ export interface TypeDamageReponse {
   }
 
   
-export async function getType(typeurl: string): Promise<TypeDamageReponse> {
+export async function getType(typeurl: string): Promise<TypeDamageResponse> {
   const { data: typedata } = await api.get(`${typeurl}`);
   return { damage_relations: typedata.damage_relations };
 

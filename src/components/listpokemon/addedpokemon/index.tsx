@@ -12,7 +12,6 @@ interface pokemonProps {
 export const Addedpokemon = ({pokemon, index} : pokemonProps) => {
   
   const { setShiny, handleSetShowPokemon, handleRemovePokemon } = usePokemonTeam();
-
   const avatar = pokemon?.isShiny ? pokemon?.sprite[1] : pokemon?.sprite[0];
   
   return pokemon ? (

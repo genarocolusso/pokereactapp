@@ -41,16 +41,16 @@ export function ShowPokemon() {
         </S.TypeRow>
        </S.PokemonTypeContainer>
         
-       <S.TypeRow> 
-      <Button   
-      colorScheme='green' 
-      onClick={()=> handlePokemonTeam(pokemon)}
-       >Add Pokémon</Button> 
-     <Button  
-     colorScheme='teal'  
-     onClick={()=> handleShiny(!pokemon.isShiny)}>
-     <Icon  as={pokemon.isShiny ?  FaStar  : FaStarHalfAlt} /> Shiny </Button> 
-     </S.TypeRow>
+      <S.TypeRow> 
+        <Button   
+          colorScheme='green' 
+          onClick={()=> handlePokemonTeam(pokemon)}
+          >Add Pokémon</Button> 
+        <Button  
+        colorScheme='teal'  
+        onClick={()=> handleShiny(!pokemon.isShiny)}>
+        <Icon  as={pokemon.isShiny ?  FaStar  : FaStarHalfAlt} /> Shiny </Button> 
+      </S.TypeRow>
 
         <S.PokemonTypeContainer>
           <S.Title> Effectiveness</S.Title>
