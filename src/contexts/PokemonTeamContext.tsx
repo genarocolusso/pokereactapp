@@ -77,9 +77,10 @@ export const PokemonTeamContextProvider = (props : ProviderProps) =>{
         dispatch({ type: pokemon_actions.LOAD_TEAM,payload:{Team:cookieTeam, Number: 0 }  });
     }  
 
-    if (myTeamCookie) {
+    if (localStorage.getItem("myTeams")) {
       const teamsCookie : pokemonTeam[] =
-        JSON.parse(myTeamCookie);
+      JSON.parse( localStorage.getItem("myTeams")) || [];
+
         dispatch({ type: pokemon_actions.LOAD_MY_TEAMS, pokemonTeams:teamsCookie });
     }  
   }, []) 
@@ -102,6 +103,7 @@ export const PokemonTeamContextProvider = (props : ProviderProps) =>{
       if(pokemonUserState.pokemonTeams.length>0){
         
     console.log(" poketeam changed", pokemonUserState)
+      localStorage.setItem("myTeams",  JSON.stringify(pokemonUserState.pokemonTeams))
         setCookie(
           undefined,
           "myTeams",

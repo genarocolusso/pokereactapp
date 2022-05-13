@@ -16,7 +16,7 @@ export const pokemon_actions = {
   }
   
 export const reducer = (state : pokemonUserStateType, action) => {
-
+        console.log(action.type, state)
     switch (action.type){
         case pokemon_actions.ADD_POKEMON:
                  return  {...state, currentTeam: {...state.currentTeam, data: [...state.currentTeam.data, action.newPokemon]} } 
