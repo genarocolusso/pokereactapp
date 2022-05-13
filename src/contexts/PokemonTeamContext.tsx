@@ -150,6 +150,7 @@ export const PokemonTeamContextProvider = (props : ProviderProps) =>{
 
     const handleAddPokeTeam = (pokemons: pokemonTeam) => { 
       console.log(pokemons)
+      if(pokemons.data.length>0)
       dispatch({type: pokemon_actions.SAVE_TEAM, pokemonsTeam: {...pokemons}})       
     }
 
