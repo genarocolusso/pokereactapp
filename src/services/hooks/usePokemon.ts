@@ -8,7 +8,7 @@ type GetPokemonResponse = {
   pokemon: pokemonInterface
 }
 
-export async function getPokemon(id: number): Promise<GetPokemonResponse> {
+export async function getPokemon(id: string): Promise<GetPokemonResponse> {
 
   const { data, headers } = await api.get(`pokemon/${id}`);
 
@@ -27,7 +27,7 @@ export async function getPokemon(id: number): Promise<GetPokemonResponse> {
 
 }
 
-export function usePokemon(id: number) {
+export function usePokemon(id: string) {
   return useQuery(['pokemon', id], () => getPokemon(id), {
     staleTime: 1000 * 600  // 10min
   })

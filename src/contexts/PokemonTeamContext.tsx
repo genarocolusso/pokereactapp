@@ -13,6 +13,16 @@ export interface pokemonInterface {
     sprite: string[], 
     isShiny: boolean,
   }
+
+  export interface pokemonTeam {
+    data: pokemonInterface[],
+    teamNumber: number
+  }
+  export interface pokemonUserStateType {
+    pokemonTeams: pokemonTeam[],
+    currentTeam: pokemonTeam 
+  }
+
   const MAX_AGE = 30 * 24 * 60 * 60;
   const DEFAULT_VALUE = {
     id: "",
@@ -23,38 +33,40 @@ export interface pokemonInterface {
     isShiny: false,
   }
 type pokemonContextData = {
-    pokemons: pokemonInterface[],
+    pokemonUserState: pokemonUserStateType,
+    handleAddPokeTeam: (pokemons : pokemonTeam) => void,
     handlePokemonTeam: (pokemon : pokemonInterface) => void,
-    setShiny: (shiny: boolean, index: number) => void,
+    handleLoadTeam: (pokemonTeam: pokemonTeam) => void,
+    setShiny: (shiny: boolean, index: string) => void,
     showpokemon: pokemonInterface,
     handleSetShowPokemon: (pokemon : pokemonInterface) => void,
     handlerSearch: (id: string) => void,
-    handleDeletePokeTeam: () => void,
+    handleDeletePokeTeam: (index : string | number) => void,
     handleRemovePokemon: (id: string) => void,
   } & QueryEffects;
  
   interface ProviderProps {
     children: ReactNode;
-  }
-
-//omit remove
-//pick adds
+  } 
   
 export const PokemonTeamContext = createContext({} as pokemonContextData)
 
 
 export const PokemonTeamContextProvider = (props : ProviderProps) =>{
-  const { pokemonTeam: pokemonTeamCookie } = parseCookies();
-  const [pokemons, dispatch] = useReducer(reducer,initialState)
+  const { pokemonTeam: pokemonTeamCookie, myTeams: myTeamCookie } = parseCookies();
+  const [pokemonUserState, dispatch] = useReducer(reducer,initialState)   
+
+  const {  pokemonTeams, currentTeam : pokemons } = pokemonUserState;
+
   const [showpokemon, setShowpokemon] = useState<pokemonInterface>(DEFAULT_VALUE);
-  const [pokemonSearch, setPokemonSearch ] = useState<number>(1);
-   const { data, isLoading, isFetching, error } = usePokemon(pokemonSearch);
+  const [pokemonSearch, setPokemonSearch ] = useState<string>(`1`);
+
+  const { data, isLoading, isFetching, error } = usePokemon(pokemonSearch);
 
   useEffect(() => {
+    console.log(pokemonTeams);
     if(data){
-      
     setShowpokemon(data?.pokemon);
- 
   }
   }, [data]);
 
@@ -62,30 +74,52 @@ export const PokemonTeamContextProvider = (props : ProviderProps) =>{
     if (pokemonTeamCookie) {
       const cookieTeam : pokemonInterface[] =
         JSON.parse(pokemonTeamCookie);
-        dispatch({ type: pokemon_actions.LOAD_TEAM, Team:cookieTeam });
+        dispatch({ type: pokemon_actions.LOAD_TEAM,payload:{Team:cookieTeam, Number: 0 }  });
+    }  
+
+    if (myTeamCookie) {
+      const teamsCookie : pokemonTeam[] =
+        JSON.parse(myTeamCookie);
+        dispatch({ type: pokemon_actions.LOAD_MY_TEAMS, pokemonTeams:teamsCookie });
     }  
   }, []) 
  
   useEffect(()=>{ 
-    if(pokemons.length>0){
+    
+    console.log(" pokemonstate changed", pokemonUserState)
+    if(pokemons?.data?.length>0){
       setCookie(
         undefined,
         "pokemonTeam",
-        JSON.stringify(pokemons),
+        JSON.stringify(pokemons.data),
         {
           maxAge: MAX_AGE,
           path: "/",
         }
       );
       } 
-  },[pokemons])
+
+      if(pokemonUserState.pokemonTeams.length>0){
+        
+    console.log(" poketeam changed", pokemonUserState)
+        setCookie(
+          undefined,
+          "myTeams",
+          JSON.stringify(pokemonUserState.pokemonTeams),
+          {
+            maxAge: MAX_AGE,
+            path: "/",
+          }
+        );
+        } 
+  },[pokemons, pokemonUserState.pokemonTeams])
 
     const handlePokemonTeam =(pokemon : pokemonInterface) => {  
-    
-      const allPokeIds = pokemons.map(pokemon => pokemon.id) 
+      console.log(pokemons)
+      const allPokeIds = pokemons.data.map(pokemon => pokemon.id) 
       const hasAlready = allPokeIds.includes(pokemon.id);
       const newPokemon = {...pokemon};
-      if(pokemons.length<6 && !hasAlready){   
+      if(pokemons?.data?.length<6 && !hasAlready){   
       dispatch({ type: pokemon_actions.ADD_POKEMON, newPokemon });
       }
      
@@ -95,37 +129,38 @@ export const PokemonTeamContextProvider = (props : ProviderProps) =>{
      setShowpokemon(pokemon);
     }
     
-    const handleDeletePokeTeam = () => {
+    const handleDeletePokeTeam = (index : string | number) => {
       destroyCookie(null, 'pokemonTeam')
-      dispatch({ type: pokemon_actions.DELETE_TEAM });
+      dispatch({ type: pokemon_actions.DELETE_TEAM , index});
     }
-        
+
+    const handleLoadTeam = (pokemonteam: pokemonTeam) => { 
+      dispatch({ type: pokemon_actions.LOAD_TEAM, payload:{Team: pokemonteam.data, Number: pokemonteam.teamNumber }});
+    }
     const handleRemovePokemon = (id) => { 
       dispatch({ type: pokemon_actions.REMOVE_POKEMON , id});
     }  
      
     const handlerSearch = (id : string) => 
     { 
-      setPokemonSearch(parseInt(id))
+      setPokemonSearch(id)
     };
 
-    const setShiny = (shiny: boolean, index: number) => { 
-        const newPokemons = [...pokemons]
-        const changeShiny = newPokemons.map( (pokemon,i)=> { 
-          if(i === index){
-          pokemon.isShiny = shiny;
-           }
-          return pokemon;
-      })
+    const handleAddPokeTeam = (pokemons: pokemonTeam) => { 
+      console.log(pokemons)
+      dispatch({type: pokemon_actions.SAVE_TEAM, pokemonsTeam: {...pokemons}})       
+    }
 
-      dispatch({ type: pokemon_actions.LOAD_TEAM, Team: changeShiny  });
-             
+    const setShiny = (shiny: boolean, id: string) => {  
+      dispatch({ type: pokemon_actions.SET_CURRENT_SHINY, Team: { id: id, isShiny: shiny } });   
     }
 
 
     const values = { 
-      pokemons, 
+      pokemonUserState,
       handlePokemonTeam, 
+      handleAddPokeTeam,
+      handleLoadTeam,
       setShiny, 
       showpokemon, 
       handleSetShowPokemon, 

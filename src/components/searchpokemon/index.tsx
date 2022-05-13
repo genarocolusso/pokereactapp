@@ -14,7 +14,7 @@ export const Searchpokemon: React.FC = () => {
 const handler = useCallback(debounce((id : string) => 
 {
   if(id.length>0)
-  handlerSearch(id)
+  handlerSearch(id.toLowerCase().trim())
 }, 1000), []);
 
 
@@ -23,7 +23,7 @@ const handler = useCallback(debounce((id : string) =>
     <form  onSubmit={(e)=>{  e.preventDefault(); }}>
         <Box as={'label'} display={"flex"} flexDir={'row'} alignItems={'center'}> 
             <Icon  as={FaSearch} fontSize={16} mr={4}/>
-            <Input   variant='unstyled'   size='md' type="text" name="Name" placeholder='Enter pokemon ID number'  onChange={(e) => handler(e.target.value)}  />
+            <Input   variant='unstyled'   size='md' type="text" name="Name" placeholder='Enter pokemon name or number'  onChange={(e) => handler(e.target.value)}  />
              
         </Box>
     </form>

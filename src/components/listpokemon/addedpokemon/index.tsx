@@ -19,7 +19,7 @@ export const Addedpokemon = ({pokemon, index} : pokemonProps) => {
     <Button  h={'55px'} minW={"300px"} display={"flex"} justifyContent={"space-between"} px={6} onClick={()=>handleSetShowPokemon({...pokemon})}>
      <Text textTransform={'capitalize'}> {pokemon.name} </Text>
       <HStack>
-        <Image src={avatar} alt={pokemon.name} onClick={(e)=>{e.stopPropagation(); setShiny(!pokemon.isShiny, index)}}></Image>
+        <Image src={avatar} alt={pokemon.name} onClick={(e)=>{e.stopPropagation(); setShiny(!pokemon.isShiny, pokemon.id)}}></Image>
         <Icon as={FaTrash} color={'red.300'}
          onClick={(e)=>{e.stopPropagation(); handleRemovePokemon(pokemon.id)}}
          />
