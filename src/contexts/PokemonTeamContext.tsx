@@ -131,6 +131,8 @@ export const PokemonTeamContextProvider = (props : ProviderProps) =>{
     
     const handleDeletePokeTeam = (index : string | number) => {
       destroyCookie(null, 'pokemonTeam')
+      if(index == 0)      
+      destroyCookie(null, 'myTeams')
       dispatch({ type: pokemon_actions.DELETE_TEAM , index});
     }
 
