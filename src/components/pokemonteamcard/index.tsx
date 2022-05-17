@@ -1,4 +1,4 @@
-import { Avatar, AvatarGroup } from "@chakra-ui/react"
+import { Avatar, AvatarGroup, theme } from "@chakra-ui/react"
 import { pokemonTeam } from "../../contexts/PokemonTeamContext"
 import { usePokemonTeam } from "../../hooks/usePokemonTeamContext"
 
@@ -15,7 +15,10 @@ return (
     const avatar = pokemon?.isShiny ? pokemon?.sprite[1] : pokemon?.sprite[0];
   
     return( 
-     <Avatar key={pokemon.name+"p"+pokemon.id} name={pokemon.name} src={avatar} />
+     <Avatar bg={"gray.700"} 
+     border={`1px solid ${theme.colors.gray[600]}`}
+     key={pokemon.name+"p"+pokemon.id} 
+     name={pokemon.name} src={avatar} />
      ) 
     })}
 </AvatarGroup>

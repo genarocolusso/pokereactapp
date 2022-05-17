@@ -16,13 +16,13 @@ export const Addedpokemon = ({pokemon, index} : pokemonProps) => {
   
   return pokemon ? (
      
-    <Button  h={'55px'} minW={"300px"} display={"flex"} justifyContent={"space-between"} px={6} onClick={()=>handleSetShowPokemon({...pokemon})}>
+    <Button bg={"#313030"} _active={{bg:"#242424"}} _hover={{bg:"#242424"}} h={'55px'} minW={"300px"} display={"flex"} justifyContent={"space-between"} px={6} onClick={()=>handleSetShowPokemon({...pokemon})}>
      <Text textTransform={'capitalize'}> {pokemon.name} </Text>
       <HStack>
         <Image src={avatar} alt={pokemon.name} onClick={(e)=>{e.stopPropagation(); setShiny(!pokemon.isShiny, pokemon.id)}}></Image>
-        <Icon as={FaTrash} color={'red.300'}
+        {/* <Icon as={FaTrash} color={'red.300'}
          onClick={(e)=>{e.stopPropagation(); handleRemovePokemon(pokemon.id)}}
-         />
+         /> */}
       </HStack>
        </Button>
      

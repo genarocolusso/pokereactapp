@@ -15,6 +15,10 @@ const GlobalStyle = createGlobalStyle`
        -moz-box-sizing: border-box;
             box-sizing: border-box;
 }
+ *:focus{
+   outline: none;
+   box-shadow: none;
+ }
 `;
 
 

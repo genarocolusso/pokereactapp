@@ -16,7 +16,7 @@ export const TypePokemon = ({name, typeEffect }: typeProps) =>{
     const typeColor :string  =  PokeTypes[`${name}`]
 
     return (<>
-        {!typeEffect &&  (<Box bg={'white'} border={`1px solid ${typeColor}`} borderRadius={'6'} color={typeColor} textAlign="center" px={4} >
+        {!typeEffect &&  (<Box bg={'whiteAlpha.100'} border={`1px solid ${typeColor}`} borderRadius={'6'} color={"whiteAlpha.900"} textAlign="center" px={4} >
         {capitalizeFirstLetter(name.toLowerCase())}  {typeEffect && `X${typeEffect}`}
     </Box> )}
         

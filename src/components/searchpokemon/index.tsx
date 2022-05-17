@@ -5,7 +5,7 @@ import { ShowPokemon } from '../showpokemon'
 import { FaSearch } from 'react-icons/fa';
   
 import { usePokemonTeam } from '../../hooks/usePokemonTeamContext';
-import { Box, Flex, Input, Icon  } from '@chakra-ui/react';
+import { Box, Flex, Input, Icon, Text } from '@chakra-ui/react';
 
 export const Searchpokemon: React.FC = () => {
   
@@ -19,15 +19,37 @@ const handler = useCallback(debounce((id : string) =>
 
 
   return (
-    <Flex flexDir={'column'} pos={'relative'}>
+    <Flex flexDir={'column'} gap={6}>
+        <ShowPokemon/>
+    <Flex  flexDir={'column'} alignItems={"center"} >
+      <Box w={"340px"}>
+    <Text textAlign={"center"} color={"#959595"}>Search Pokemons and build your teams.</Text>
     <form  onSubmit={(e)=>{  e.preventDefault(); }}>
-        <Box as={'label'} display={"flex"} flexDir={'row'} alignItems={'center'}> 
-            <Icon  as={FaSearch} fontSize={16} mr={4}/>
-            <Input   variant='unstyled'   size='md' type="text" name="Name" placeholder='Enter pokemon name or number'  onChange={(e) => handler(e.target.value)}  />
+        <Box as={'label'}
+        display={"flex"}
+        flexDir={'row'}
+        alignItems={'center'}
+        bg={"#3B3A3A"}
+        py={2}
+        px={6}
+        borderRadius={'full'}
+        > 
+             
+            <Input
+            variant='unstyled'
+            size='md'
+            type="text"
+            name="Name"
+            placeholder='Enter pokemon name or number'
+            onChange={(e) => handler(e.target.value)}
+            color={"red.400"}
+            />
+            <Icon  as={FaSearch} fontSize={14}/>
              
         </Box>
     </form>
-    <ShowPokemon/>
+    </Box>
+    </Flex>
       
     </Flex>
   )

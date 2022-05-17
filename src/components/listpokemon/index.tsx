@@ -1,4 +1,4 @@
-import { Button, Stack } from '@chakra-ui/react';
+import { Box, Button, Heading, Stack } from '@chakra-ui/react';
 import React from 'react'
 import { usePokemonTeam } from '../../hooks/usePokemonTeamContext'; 
 import { TeamsDrawer } from '../teamsdrawer';
@@ -9,16 +9,24 @@ export const Listpokemon = () => {
   const {pokemonUserState, handleDeletePokeTeam, handleAddPokeTeam} = usePokemonTeam()
   const pokemons = [...pokemonUserState.currentTeam.data]
   return (
+    <Box bg={"#222121"} borderRadius={12} p={6}>
+       
     <Stack spacing={'4'}> 
       { pokemons?.length>0  ? 
+      <>
+          <Heading fontWeight={"normal"} fontSize={"2xl"}> Team <Box as="span"  color={"red.400"}> #{pokemonUserState.currentTeam.teamNumber +1} </Box></Heading>
+      {
         pokemons?.map((pokemon,i) => (
           <Addedpokemon key={pokemon.id+i} pokemon={pokemon} index={i}/>
         )) 
+        }
+        </>
         :
         ( 
-          <h3> Add pokemons to your team, PLEASE</h3>
+          <Heading fontWeight={"normal"} fontSize={"lg"}> Add pokemons to your team</Heading>
         )
       } 
+  
       <Button bg='#9b55dd' 
        _hover={{ bg: "#894ac4" }} 
        color={"white"} 
@@ -33,5 +41,6 @@ export const Listpokemon = () => {
       </Button>
        
     </Stack>
+    </Box>
   )
 }

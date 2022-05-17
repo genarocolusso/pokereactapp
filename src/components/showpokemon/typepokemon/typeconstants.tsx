@@ -14,7 +14,7 @@ export const PokeTypes : types = {
     STEEL: "#b9b9b9",
     BUG: "#a1b44d",
     ICE: "#9ad2e0",
-    DARK: "#3b3227",
+    DARK: "#49424e",
     DRAGON: "#632cbb",
     ELECTRIC: "#f3d942",
     PSYCHIC: "#d82762",

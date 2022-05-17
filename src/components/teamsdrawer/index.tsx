@@ -21,14 +21,14 @@ export const TeamsDrawer = ({pokemonTeams}: teamsProps)=> {
           placement='right'
           onClose={onClose}
           finalFocusRef={btnRef}
+         
         >
           <DrawerOverlay />
-          <DrawerContent>
+          <DrawerContent  bg={"#212121"}>
             <DrawerCloseButton />
             <DrawerHeader>Select a Team</DrawerHeader>
   
             <DrawerBody>
-              <Input placeholder='Type here...' />
               <Box mt={6}>
               {pokemonTeams.length>0 && 
               
