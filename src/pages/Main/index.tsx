@@ -12,7 +12,7 @@ export const MainContainer: React.FC = () => {
 
   return (
  
-    <Grid w={"100%"}  px={[4,8]}  templateColumns={{base: "repeat(1, 1fr)",md:"repeat(2, 1fr)", lg:"repeat(3, 1fr)"}} gap={4}>
+    <Grid w={"100%"} templateColumns={{base: "repeat(1, 1fr)",md:"repeat(2, 1fr)", lg:"repeat(3, 1fr)"}} gap={4}>
     <GridItem colStart={1} colEnd={[1,1,2,3]}    >  
     <Searchpokemon/>
     </GridItem> 
