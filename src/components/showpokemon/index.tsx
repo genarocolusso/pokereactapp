@@ -20,7 +20,7 @@ export function ShowPokemon() {
   return (
     <Flex direction={"column"} width={"100%"} alignItems={"center"}>
       
-      {pokemon && ( 
+      {pokemon.id && ( 
         <>
       <Heading textTransform={'capitalize'} fontWeight={"normal"} size={"xl"} color={"red.400"}>
       #{pokemon.id} {pokemon.name}  
@@ -35,18 +35,24 @@ export function ShowPokemon() {
         </Flex>
        </Box>
 
+
       <Image boxSize='208px' src={pokemonImage} alt={pokemon.name}/>      
        
         
       <Flex mt={4} gap={2}> 
-        <Button   
-          colorScheme='green' 
+        <Button    
+          bg={"transparent"}
+          color={"white"}
+          border={"1px solid white"}
+          _hover={{bg:"whiteAlpha.300"}}
           onClick={()=> handlePokemonTeam(pokemon)}
           >Add Pokémon</Button> 
-        <Button  
-        colorScheme='teal'  
+        <Button   
+        bg={"red.400"}
+        _hover={{bg:"red.500"}}
+        color={"white"} 
         onClick={()=> handleShiny(!pokemon.isShiny)}>
-        <Icon  as={pokemon.isShiny ?  FaStar  : FaStarHalfAlt} /> Shiny </Button> 
+        <Icon as={pokemon.isShiny ?  FaStar  : FaStarHalfAlt} /> Shiny </Button> 
       </Flex>
 
         {/* <Box>

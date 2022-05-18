@@ -1,25 +1,18 @@
 
-import { MainContainer } from './pages/Main'; 
-import GlobalStyle from './globalStyles'; 
-import { Box, Flex } from '@chakra-ui/react';
-import { PokeLogo } from './components/pokelogo';
-import { SideMenu } from './components/menu';
+import { Routes, Route, Outlet, Link } from "react-router-dom";
+import Layout from './pages/Layout';
+import { MainContainer } from "./pages/Main";
+import { Teams } from "./pages/Teams";
 
 function App() {
   return (
     
-    <div className="App">  
-        <GlobalStyle/>
-        <Box  px="6"  my="6" maxWidth={1480} mx="auto" bg={"#1D1C1C"} >
-    <Flex direction={"column"}>
-    <PokeLogo/> 
-    <Flex> 
-      <SideMenu/>
-       <MainContainer/> 
-       </Flex>
-       </Flex>
-       </Box>
-    </div>
+    <Routes>
+    <Route path="/" element={<Layout />}> 
+        <Route index element={<MainContainer />} />
+        <Route path="teams" element={<Teams/>} />
+    </Route>
+  </Routes>
      
   );
 }

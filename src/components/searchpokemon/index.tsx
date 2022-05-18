@@ -23,7 +23,7 @@ const handler = useCallback(debounce((id : string) =>
         <ShowPokemon/>
     <Flex  flexDir={'column'} alignItems={"center"} >
       <Box w={"340px"}>
-    <Text textAlign={"center"} color={"#959595"}>Search Pokemons and build your teams.</Text>
+    <Text textAlign={"center"} color={"#959595"}>Search Pokémon and build your teams.</Text>
     <form  onSubmit={(e)=>{  e.preventDefault(); }}>
         <Box as={'label'}
         display={"flex"}

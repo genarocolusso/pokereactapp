@@ -1,4 +1,5 @@
-import { Stack, Text, Link  } from "@chakra-ui/react"
+import { Link } from "react-router-dom";
+import { Link as LinkChakra } from "@chakra-ui/react";
 import React, { ReactNode } from "react"
 import { useLocation } from "react-router-dom"
 
@@ -14,6 +15,10 @@ export const SidebarLink = ({children, path} : SidebarLinkProps) =>{
     const activeLocation = router.pathname == path ;
     const color = activeLocation ? "red.400" : "white";
     return (
-        <Text fontSize={20} color={color}>{children}</Text>
+         
+        <LinkChakra fontSize={20} color={color}>
+             <Link  to={path} >{children}</Link>
+        </LinkChakra>
+        
     )
 }
