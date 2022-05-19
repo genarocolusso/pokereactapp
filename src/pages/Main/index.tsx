@@ -1,4 +1,4 @@
-import { Grid, GridItem } from '@chakra-ui/react'
+import { Flex, Grid, GridItem } from '@chakra-ui/react'
 import React from 'react'
 import { Listpokemon } from '../../components/listpokemon'
 import { Searchpokemon } from '../../components/searchpokemon'
@@ -17,7 +17,9 @@ export const MainContainer: React.FC = () => {
     <Searchpokemon/>
     </GridItem> 
     <GridItem colStart={[1,1,2,3]} >  
+    <Flex justifyContent={"center"}>
     <Listpokemon pokemonTeam={pokemons}/>
+    </Flex>
     </GridItem> 
       </Grid>  
       
