@@ -1,6 +1,6 @@
 export type QueryEffects = {
-    isLoading?: boolean;
-    isFetched?: boolean;
-    isFetching?: boolean;
-    isError?: boolean;
-  };
+  isLoading?: boolean;
+  isFetched?: boolean;
+  isFetching?: boolean;
+  isError?: boolean;
+};
