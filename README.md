@@ -1,6 +1,7 @@
 # Poke React TeamBuilder
 
 This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
+![Screenshot_2](https://github.com/genarocolusso/pokereactapp/assets/780543/bae93796-f963-41c1-8470-5bb8bcb1bc9b)
 
 ## Available Scripts
 
